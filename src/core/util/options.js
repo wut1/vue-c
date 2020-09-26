@@ -415,6 +415,16 @@ export function mergeOptions (
         parent = mergeOptions(parent, child.mixins[i], vm)
       }
     }
+    if(child.track) {
+      const {view,...args} = child.track
+      if(child.track.view) {
+        parent = mergeOptions(parent, {created:view}, vm)
+      }
+      if(args) {
+        parent = mergeOptions(parent, {methods:args}, vm)
+      }
+      
+    }
   }
 
   const options = {}
